@@ -16,9 +16,9 @@ $(function() {
     //设置购买数量
     var _num=1;
     //设置购买座位  2vip 3普 4站
-    var _seattype=3;
+    var _seattype=2;
     //设置循环间隔
-    var _time=2000;
+    var _time=500;
 
 
 
@@ -52,6 +52,7 @@ $(function() {
                             break;
                         case "fail":
                             layer.msg(result.Message);
+                            console.info('/TOrder/tickCheck 失败');
                             break;
                         default:
                             _loop();
@@ -61,6 +62,7 @@ $(function() {
             },
             error: function (e) {
                 _loop();
+                console.info('/TOrder/tickCheck Error');
 
             }
         });
@@ -77,13 +79,17 @@ $(function() {
                 if (result.HasError) {
                     //失败操作
                     layer.msg(result.Message);
+                    console.info('/TOrder/add 失败');
+
                 }
                 else {
                     if(result.Message =="success")
                     {
+                        console.info('/TOrder/add Succeess');
                         window.location.href = result.ReturnObject;
                     }else
                     {
+                        console.info('/TOrder/add 没 Succeess 进入loop');
                         _loop();
                     }
                 }
